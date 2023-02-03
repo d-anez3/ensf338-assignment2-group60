@@ -22,28 +22,25 @@ def func2(array, start, end):
     array[start], array[high] = array[high], array[start]
     return high
 
-with open('ex2/ex2.json', 'r') as f:
+with open('ex2.json', 'r') as f:
     data = json.load(f)
 
 df = pd.DataFrame(data)
-print(len(df))
-print(df.iloc[9])
-
 
 timings = {}
 
     
-# for key in df.columns:
-#     if np.isnan(df[key]).any():
-#         continue
-#     array = df[key].to_list()
-#     time = timeit.timeit(lambda: func1(array, 0, len(array) - 1), number=1)
-#     timings[key] = time
+for key in df.columns:
+    if np.isnan(df[key]).any():
+         continue
+    array = df[key].to_list()
+    time = timeit.timeit(lambda: func1(array, 0, len(array) - 1), number=1)
+    timings[key] = time
 
-# x = list(timings.keys())
-# y = list(timings.values())
-# plt.bar(x, y)
-# plt.xlabel('Array')
-# plt.ylabel('Time (s)')
-# plt.title('QuickSort Timing Results')
-# plt.show()
+x = list(timings.keys())
+y = list(timings.values())
+plt.plot(x, y)
+plt.xlabel('Array')
+plt.ylabel('Time (s)')
+plt.title('Quicksort Timing Results')
+plt.show()
